@@ -1,0 +1,65 @@
+[gd_scene load_steps=11 format=3 uid="uid://ctduwgo007252"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_4im5y"]
+[ext_resource type="Texture2D" uid="uid://b4wq1tylhyh3o" path="res://src_image/sprite_player_attack_0.png" id="1_myjvo"]
+[ext_resource type="Texture2D" uid="uid://dd3gxwjsci0qg" path="res://src_image/sprite_player_attack_1.png" id="2_j62mb"]
+[ext_resource type="Texture2D" uid="uid://dbiyv5410igv7" path="res://src_image/sprite_player_stand_0.png" id="3_lwcca"]
+[ext_resource type="Texture2D" uid="uid://hv8glm5cxtwn" path="res://src_image/sprite_player_run_0.png" id="4_rpxp1"]
+[ext_resource type="Texture2D" uid="uid://ymgy1vwjmxqr" path="res://src_image/sprite_player_run_1.png" id="5_q5i7y"]
+[ext_resource type="Texture2D" uid="uid://m8qm2lsbib0u" path="res://src_image/sprite_player_run_2.png" id="6_qdd77"]
+[ext_resource type="Texture2D" uid="uid://qb7i0he1njph" path="res://src_image/sprite_player_run_3.png" id="7_nfuyr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2e2jt"]
+radius = 15.0
+height = 40.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tsoyw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_myjvo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_j62mb")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_lwcca")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_rpxp1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_q5i7y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qdd77")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nfuyr")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_4im5y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_2e2jt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tsoyw")
+animation = &"Run"
+frame = 3
+frame_progress = 0.241516
