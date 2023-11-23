@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck4k3ai722gvv"]
+
+[ext_resource type="Script" path="res://Main/lore.gd" id="1_rs7jy"]
+
+[node name="Lore" type="Node2D"]
+script = ExtResource("1_rs7jy")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 184.0
+offset_top = 38.0
+offset_right = 1016.0
+offset_bottom = 575.0
+text = "In the quaint village of Eldoria, where magic and mystery intertwined, lived Toby, a spirited and mischievous young adventurer. With his bright red shirt and trusty blue pants, Toby was easily recognizable as the village's most energetic troublemaker.
+
+Toby's fascination with the ancient tales of legendary heroes led him to the dusty shelves of the village library. One day, while leafing through an old tome, he stumbled upon a forgotten legend of a hidden dagger and a mystical shield said to hold unimaginable powers. Determined to uncover the truth, Toby set out on a quest to find these artifacts.
+
+His journey took him through dense forests and treacherous mountains, facing challenges that tested his courage and wit. Along the way, he encountered a wise old wizard who saw potential in Toby's daring spirit. The wizard gifted him a small shield imbued with protective magic, and Toby's left hand became its steadfast companion.
+
+Armed with his newfound treasures, Toby returned to Eldoria, but his adventures were far from over. The villagers, once wary of his antics, now admired him for his bravery. Toby became the guardian of Eldoria, using his dagger and shield to defend the village from the occasional monster or rogue sorcerer.
+
+Despite his newfound heroism, Toby never lost his mischievous spark. He would regale the village children with exaggerated tales of his adventures, turning mundane events into epic sagas. Eldoria thrived under Toby's watchful eye, and his legend grew with each passing day, ensuring that the name \"Toby\" would be remembered in the village for generations to come."
+
+[node name="Button" type="Button" parent="."]
+offset_left = 534.0
+offset_top = 558.0
+offset_right = 640.0
+offset_bottom = 622.0
+text = "Back"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

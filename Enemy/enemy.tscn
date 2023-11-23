@@ -1,0 +1,138 @@
+[gd_scene load_steps=15 format=3 uid="uid://74xpk34nc8dl"]
+
+[ext_resource type="Texture2D" uid="uid://cc04n13ifuuy0" path="res://src_image/enemy_0.png" id="1_dxalu"]
+[ext_resource type="Script" path="res://Enemy/enemy.gd" id="1_ei3tr"]
+[ext_resource type="Texture2D" uid="uid://bohjjwbjbfnsb" path="res://src_image/enemy_1.png" id="2_vxwcq"]
+[ext_resource type="Texture2D" uid="uid://c5aaxilf46g24" path="res://src_image/enemy_2.png" id="3_3155b"]
+[ext_resource type="Texture2D" uid="uid://c8oy1shfadlpa" path="res://src_image/enemy_3.png" id="4_w6kix"]
+[ext_resource type="Texture2D" uid="uid://coht0gujxue2x" path="res://src_image/enemy_4.png" id="5_fq5b1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ikse"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_dxalu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_vxwcq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3155b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w6kix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fq5b1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2d73n"]
+size = Vector2(32, 24)
+
+[sub_resource type="Animation" id="Animation_dtcxm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_75xy2"]
+resource_name = "default"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_knjys"]
+_data = {
+"RESET": SubResource("Animation_dtcxm"),
+"default": SubResource("Animation_75xy2")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ot13i"]
+radius = 138.058
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qi2c1"]
+size = Vector2(34, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ax4w"]
+size = Vector2(85, 91)
+
+[node name="Enemy" type="CharacterBody2D"]
+platform_floor_layers = 4294901760
+script = ExtResource("1_ei3tr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4ikse")
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_2d73n")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_knjys")
+}
+
+[node name="PlayerChase" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerChase"]
+shape = SubResource("CircleShape2D_ot13i")
+
+[node name="PlayerCollision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollision"]
+shape = SubResource("RectangleShape2D_qi2c1")
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="RecieveAttack" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RecieveAttack"]
+shape = SubResource("RectangleShape2D_8ax4w")
+
+[connection signal="body_entered" from="PlayerChase" to="." method="_on_player_chase_body_entered"]
+[connection signal="body_exited" from="PlayerChase" to="." method="_on_player_chase_body_exited"]
+[connection signal="body_entered" from="PlayerCollision" to="." method="_on_player_collision_body_entered"]
+[connection signal="body_exited" from="PlayerCollision" to="." method="_on_player_collision_body_exited"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="body_entered" from="RecieveAttack" to="." method="_on_recieve_attack_body_entered"]
+[connection signal="body_exited" from="RecieveAttack" to="." method="_on_recieve_attack_body_exited"]
