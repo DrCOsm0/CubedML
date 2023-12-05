@@ -24,19 +24,25 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _process(delta):
-	
 	if health == 0:
+		player.ai_controller.reward += 50
+		player.rewards_this_gen += 50
+		get_parent().enemy_killed() 
+		player.enemies_killed += 1
 		self.queue_free()
 			
 	attack()
 	recieve_attack() 
 	
 func _ready():
+	player.ai_controller.enemy = self
 	animation.play("default")
 	
 func _on_player_chase_body_entered(body):
 	if body.name == "Player":
 		chase = true
+		player.ai_controller.reward += 5
+		player.rewards_this_gen += 5
 
 func _on_player_chase_body_exited(body):
 	if body.name == "Player":
@@ -62,7 +68,9 @@ func _on_attack_cooldown_timeout():
 func recieve_attack():
 	if in_player_attack_range == true and player.outgoing_attack == true:
 		health = health - 1
-		self.modulate.a = self.modulate.a - 0.2
+		self.modulate.a = self.modulate.a - 0.01
+		player.ai_controller.reward += 10
+		player.rewards_this_gen += 10
 
 func _on_recieve_attack_body_entered(body):
 	if body.name == "Player":

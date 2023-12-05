@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ctduwgo007252"]
+[gd_scene load_steps=32 format=3 uid="uid://ctduwgo007252"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_4im5y"]
 [ext_resource type="Texture2D" uid="uid://ygco0r7hrihk" path="res://src_image/sprite_player_attack_0.png" id="1_myjvo"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c0qsbt3t12vfc" path="res://src_image/sprite_player_run_1.png" id="5_q5i7y"]
 [ext_resource type="Texture2D" uid="uid://c7he10v5cj0m6" path="res://src_image/sprite_player_run_2.png" id="6_qdd77"]
 [ext_resource type="Texture2D" uid="uid://kl8j4jegvr2b" path="res://src_image/sprite_player_run_3.png" id="7_nfuyr"]
+[ext_resource type="Script" path="res://Player/playerAI.gd" id="9_nab6q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1uigw"]
 size = Vector2(20, 15.5)
@@ -235,3 +236,8 @@ tree_root = SubResource("AnimationNodeStateMachine_wk7b4")
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/Run/blend_position = Vector2(0.763713, 0.586057)
+
+[node name="AIController2D" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("9_nab6q")
+player = NodePath("..")
+reset_after = 5000

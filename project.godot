@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="cubedML"
-run/main_scene="res://Main/main.tscn"
+run/main_scene="res://world.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -24,6 +24,10 @@ global="*res://global.gd"
 window/size/viewport_width=2304
 window/size/viewport_height=1296
 window/stretch/scale=2.0
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_rl_agents/plugin.cfg")
 
 [input]
 

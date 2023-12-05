@@ -1,0 +1,13 @@
+res://Main/main.tscn
+res://world.tscn
+res://Player/Player.tscn
+res://Enemy/enemy.tscn
+res://Main/lore.tscn
+res://Enemy/enemy.gd
+res://Player/Player.gd
+res://Reward.gd
+res://Enemies killed.gd
+res://Generation.gd
+res://Rewards.gd
+res://Rewards last gen.gd
+res://Player/playerAI.gd
